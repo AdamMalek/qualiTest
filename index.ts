@@ -1,12 +1,11 @@
 import express from "express";
 import slugsController from "./controllers/slugsController";
-import bodyParser from "body-parser";
 import { requestLoggerMiddleware } from "./middlewares/requestLoggerMiddleware";
 
 const app = express();
 const PORT = 8000;
 
-app.use(bodyParser.json(), requestLoggerMiddleware);
+app.use(express.json(), requestLoggerMiddleware);
 
 app.all("/echo", (req, res) => res.json({ query: req.query, body: req.body }));
 
