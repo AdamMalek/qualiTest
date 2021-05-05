@@ -1,0 +1,11 @@
+<h1>Test view</h1>
+
+<h2>{{ viewName }}</h2>
+
+{{#if model}}
+    <p>
+        {{model}}
+    </p>
+{{else}}
+    <p>No model passed by query param</p>
+{{/if}}
