@@ -1,3 +1,4 @@
+require('dotenv').config();
 import express from "express";
 import slugsController from "./controllers/slugsController";
 import testController from "./controllers/testController";
@@ -5,7 +6,7 @@ import { requestLoggerMiddleware } from "./middlewares/requestLoggerMiddleware";
 var exphbs = require('express-handlebars');
 
 const app = express();
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 
 app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
