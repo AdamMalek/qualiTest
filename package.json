@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "\"set NODE_ENV=Production\" && ts-node index.ts",
+    "start": "ts-node index.ts",
     "build": "tsc --project ./",
-    "dev": "\"set NODE_ENV=Development\" && nodemon index.ts",
+    "dev": "nodemon index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
