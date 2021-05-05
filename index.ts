@@ -1,5 +1,6 @@
 import express from "express";
 import slugsController from "./controllers/slugsController";
+import testController from "./controllers/testController";
 import { requestLoggerMiddleware } from "./middlewares/requestLoggerMiddleware";
 var exphbs = require('express-handlebars');
 
@@ -18,11 +19,7 @@ const api = express.Router()
   .use('/test', slugsController);
 
 app.use("/api", api);
-
-app.get("/test-view", (req, res) => {
-  const body = req.query;
-  res.render('testView', { viewName: 'view name from model', model: Object.keys(body).length > 0 ? JSON.stringify(body) : null })
-});
+app.use("/test", testController)
 
 app.listen(PORT, () => {
   console.log(`Server started at ${PORT}`);
