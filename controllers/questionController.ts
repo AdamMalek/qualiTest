@@ -39,4 +39,30 @@ questionController.post('/', async (req, res) => {
     }
 });
 
+questionController.put('/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { title, content } = req.body;
+
+        await pool.query("UPDATE question SET title = $1, content = $2 WHERE question_id = $3",
+            [title, content, id]);
+
+        res.json("Question has been updated.");
+    } catch (error) {
+        console.error(error.message);
+    }
+});
+
+questionController.delete('/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        await pool.query("DELETE FROM question WHERE question_id = $1", [id]);
+
+        res.json("Question has been deleted.");
+    } catch (error) {
+        console.error(error.message);
+    }
+});
+
 export default questionController;

@@ -1,5 +1,3 @@
-import { createDb, migrate } from "postgres-migrations"
-
 const Pool = require('pg').Pool;
 
 const dbConfig = {
@@ -12,13 +10,4 @@ const dbConfig = {
 
 const pool = new Pool({...dbConfig});
 
-async function runMigrations(): Promise<void> {
-    await createDb('quali_test', {
-        ...dbConfig,
-        defaultDatabase: "postgres", // defaults to "postgres"
-    });
-
-    await migrate(dbConfig, `${__dirname}\\migrations`);
-}
-
-module.exports = { pool, runMigrations };
+module.exports = { pool };

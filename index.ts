@@ -4,7 +4,6 @@ import questionController from "./controllers/questionController";
 import { requestLoggerMiddleware } from "./middlewares/requestLoggerMiddleware";
 
 var exphbs = require('express-handlebars');
-const { pool, runMigrations } = require('./database/db');
 
 const app = express();
 const PORT = 8000;
@@ -29,6 +28,5 @@ app.get("/test-view", (req, res) => {
 });
 
 app.listen(PORT, async () => {
-  await runMigrations();
   console.log(`Server started at ${PORT}`);
 });

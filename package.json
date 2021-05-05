@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "ts-node index.ts",
+    "migrate": "ts-node ./database/migrate.ts",
     "build": "tsc --project ./",
     "dev": "nodemon index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
