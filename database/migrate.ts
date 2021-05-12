@@ -1,12 +1,5 @@
-import { createDb, migrate } from "postgres-migrations"
-
-const dbConfig = {
-    user: "postgres",
-    password: "GbkGS=nD6hfy",
-    database: "quali_test",
-    host: "localhost",
-    port: 5432
-}
+import { createDb, migrate } from "postgres-migrations";
+import dbConfig from "../config/database";
 
 async function runMigrations(): Promise<void> {
     console.log("Migrations has been started.");

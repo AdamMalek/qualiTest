@@ -1,13 +1,7 @@
+import dbConfig from "../config/database";
+
 const Pool = require('pg').Pool;
 
-const dbConfig = {
-    user: "postgres",
-    password: "GbkGS=nD6hfy",
-    database: "quali_test",
-    host: "localhost",
-    port: 5432
-}
+const dbPool = new Pool({...dbConfig});
 
-const pool = new Pool({...dbConfig});
-
-module.exports = { pool };
+module.exports = { dbPool };
