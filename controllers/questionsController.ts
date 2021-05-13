@@ -1,6 +1,6 @@
 import { Router as router } from "express";
 
-const { dbPool } = require('../database/db');
+import { dbPool } from "../database/db";
 
 const questionsController = router();
 
