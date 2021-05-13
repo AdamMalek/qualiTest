@@ -1,6 +1,7 @@
 export default {
-    databaseUri: process.env.DATABASE_URI,
-    port: +process.env.DATABASE_PORT!,
-    dbUser: process.env.DATABASE_USER,
-    dbPassword: process.env.DATABASE_PASSWORD
+    user:  process.env.DATABASE_USER as string,
+    password: process.env.DATABASE_PASSWORD as string,
+    database: process.env.DATABASE_NAME as string,
+    host: process.env.DATABASE_HOST as string,
+    port: +process.env.DATABASE_PORT!
 };
