@@ -6,10 +6,10 @@ services:
     image: postgres
     restart: always
     environment:
-      POSTGRES_USER: qualiTest 
-      POSTGRES_PASSWORD: 123qwe
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
     ports:
-      - 5432:5432
+      - ${DATABASE_PORT}:5432
 
   pgadmin:
     image: dpage/pgadmin4
@@ -18,5 +18,5 @@ services:
       - 80:80
       - 443:443
     environment:
-      PGADMIN_DEFAULT_EMAIL: admin@qualiTest.com
-      PGADMIN_DEFAULT_PASSWORD: 123qwe
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}
