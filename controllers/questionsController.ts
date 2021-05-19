@@ -6,7 +6,7 @@ const questionsController = router();
 
 questionsController.get('/', async (req, res) => {
     try {
-        const questions = await dbPool.query("SELECT * FROM question");
+        const questions = await dbPool.query("SELECT * FROM questions");
 
         res.json(questions);
     } catch (error) {
@@ -18,7 +18,7 @@ questionsController.get('/:id', async (req, res) => {
     const { id } = req.params;
 
     try {
-        const questions = await dbPool.query("SELECT * FROM question WHERE question_id = $1", [id]);
+        const questions = await dbPool.query("SELECT * FROM questions WHERE question_id = $1", [id]);
 
         console.log(questions);
 
@@ -31,7 +31,7 @@ questionsController.get('/:id', async (req, res) => {
 questionsController.post('/', async (req, res) => {
     try {
         const { title, content } = req.body;
-        const newQuestion = await dbPool.query("INSERT INTO question (title, content) VALUES ($1, $2) RETURNING *", [title, content]);
+        const newQuestion = await dbPool.query("INSERT INTO questions (title, content) VALUES ($1, $2) RETURNING *", [title, content]);
 
         res.json(newQuestion);
     } catch (error) {
@@ -44,7 +44,7 @@ questionsController.put('/:id', async (req, res) => {
         const { id } = req.params;
         const { title, content } = req.body;
 
-        await dbPool.query("UPDATE question SET title = $1, content = $2 WHERE question_id = $3",
+        await dbPool.query("UPDATE questions SET title = $1, content = $2 WHERE question_id = $3",
             [title, content, id]);
 
         res.json("Question has been updated.");
@@ -57,7 +57,7 @@ questionsController.delete('/:id', async (req, res) => {
     try {
         const { id } = req.params;
 
-        await dbPool.query("DELETE FROM question WHERE question_id = $1", [id]);
+        await dbPool.query("DELETE FROM questions WHERE question_id = $1", [id]);
 
         res.json("Question has been deleted.");
     } catch (error) {
