@@ -1,5 +1,6 @@
 import { createDb, migrate } from "postgres-migrations";
-import dbConfig from "../config/database";
+require('dotenv').config();
+import dbConfig from "./config/database";
 
 async function runMigrations(): Promise<void> {
     console.log("Migrations has been started.");
@@ -9,7 +10,7 @@ async function runMigrations(): Promise<void> {
         defaultDatabase: "postgres", // defaults to "postgres"
     });
 
-    await migrate(dbConfig, `${__dirname}\\migrations`);
+    await migrate(dbConfig, `${__dirname}\\database\\migrations`);
 
     console.log("Migrations has been finished.")
 }
