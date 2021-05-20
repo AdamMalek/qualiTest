@@ -14,6 +14,8 @@ app.set('view engine', 'handlebars');
 
 app.use(express.json(), requestLoggerMiddleware);
 
+app.use(express.static('public'));
+
 app.all("/echo", (req, res) => res.json({ query: req.query, body: req.body }));
 
 const api = express.Router()

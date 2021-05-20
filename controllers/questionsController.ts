@@ -7,8 +7,8 @@ const questionsController = router();
 questionsController.get('/', async (req, res) => {
     try {
         const questions = await dbPool.query("SELECT * FROM questions");
-
-        res.json(questions);
+        
+        res.render('questions', { questions: questions.rows });
     } catch (error) {
         console.error(error.message);
     }
