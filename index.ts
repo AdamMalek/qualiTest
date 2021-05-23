@@ -14,7 +14,7 @@ app.set('view engine', 'handlebars');
 
 app.use(express.json(), requestLoggerMiddleware);
 
-app.use(express.static('public'));
+app.use(express.static('./views/public'));
 
 app.all("/echo", (req, res) => res.json({ query: req.query, body: req.body }));
 
