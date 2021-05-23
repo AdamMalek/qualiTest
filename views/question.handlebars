@@ -1,0 +1,24 @@
+<div class="question-title">
+  {{#if question}}
+    <h1>
+      {{question.title}}
+    </h1>
+    <h2>
+      {{question.content}}
+    </h2>
+    <h3>
+        Answers
+    </h3>
+    <ul>      
+      {{#each answers}}
+        <li>
+          {{this.content}}
+        </li>
+      {{/each}}
+    </ul>
+  {{else}}
+    <p>
+      No model passed by query param
+    </p>
+  {{/if}}
+</div>

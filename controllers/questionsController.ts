@@ -7,7 +7,7 @@ const questionsController = router();
 questionsController.get('/', async (req, res) => {
     try {
         const questions = await dbPool.query("SELECT * FROM questions");
-        
+
         res.render('questions', { questions: questions.rows });
     } catch (error) {
         console.error(error.message);
@@ -20,7 +20,9 @@ questionsController.get('/:id', async (req, res) => {
     try {
         const questions = await dbPool.query("SELECT * FROM questions WHERE question_id = $1", [id]);
 
-        res.json(questions.rows[0]);
+        const answers = await dbPool.query("SELECT * FROM answers WHERE question_id = $1", [id]);
+
+        res.render('question', {question: questions.rows[0], answers: answers.rows});
     } catch (error) {
         console.error(error.message);
     }

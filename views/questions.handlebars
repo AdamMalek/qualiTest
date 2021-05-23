@@ -4,7 +4,11 @@
   </h1>
   {{#if questions}}
     {{#each questions}}
-      {{this.title}}
+      <h2>
+        <a href="/api/questions/{{this.question_id}}">
+          {{this.title}}
+        </a>
+      </h2>
     {{/each}}
   {{else}}
     <p>

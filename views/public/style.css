@@ -5,3 +5,8 @@ body {
 div.question-title {
     color: #2BE7F9;
 }
+
+a {
+    color: #2BE7F9;
+    text-decoration: none;
+}
