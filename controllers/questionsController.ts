@@ -20,8 +20,6 @@ questionsController.get('/:id', async (req, res) => {
     try {
         const questions = await dbPool.query("SELECT * FROM questions WHERE question_id = $1", [id]);
 
-        console.log(questions);
-
         res.json(questions.rows[0]);
     } catch (error) {
         console.error(error.message);
