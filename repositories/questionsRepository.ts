@@ -1,11 +1,10 @@
-import { QueryResult } from 'pg';
-import { dbPool } from '../database/db';
 import QuestionEntity from '../entities/questionEntity';
+import { BaseRepository } from './baseRepository';
 
 
-class QuestionsRepository {
+class QuestionsRepository extends BaseRepository {
     async getAllQuestions(): Promise<QuestionEntity[]> {
-        let res = await this.query<QuestionEntity>("SELxECT * FROM questions");
+        let res = await this.query<QuestionEntity>("SELECT * FROM questions");
         return res.rows;
     }
 
@@ -31,17 +30,6 @@ class QuestionsRepository {
     async deleteQuestion(id: number): Promise<boolean> {
         var res = await this.query<QuestionEntity>("DELETE FROM questions WHERE id = $1", [id]);
         return res.rowCount > 0;
-    }
-
-    private async query<T>(query: string, queryParams: any[] = []) : Promise<QueryResult<T>> {
-        try {
-            return dbPool.query<T>(query, queryParams);
-        }
-        catch (e)
-        {
-            console.error(e)
-            throw e;
-        }
     }
 }
 
