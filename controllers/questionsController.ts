@@ -5,27 +5,16 @@ import { dbPool } from "../database/db";
 const questionsController = router();
 
 questionsController.get('/', async (req, res) => {
-    try {
-        const questions = await dbPool.query("SELECT * FROM questions");
+    const questions = await dbPool.query("SELECT * FROM questions");
 
-        res.json(questions);
-    } catch (error) {
-        console.error(error.message);
-    }
+    res.json(questions);
 });
 
-questionsController.get('/:id', async (req, res) => {
+questionsController.get('/:id(\\d+)', async (req, res) => {
     const { id } = req.params;
+    const questions = await dbPool.query("SELECT * FROM questions WHERE question_id = $1", [id]);
 
-    try {
-        const questions = await dbPool.query("SELECT * FROM questions WHERE question_id = $1", [id]);
-
-        console.log(questions);
-
-        res.json(questions.rows[0]);
-    } catch (error) {
-        console.error(error.message);
-    }
+    res.json(questions.rows[0]);
 });
 
 questionsController.post('/', async (req, res) => {
@@ -39,7 +28,7 @@ questionsController.post('/', async (req, res) => {
     }
 });
 
-questionsController.put('/:id', async (req, res) => {
+questionsController.put('/:id(\\d+)', async (req, res) => {
     try {
         const { id } = req.params;
         const { title, content } = req.body;
@@ -53,7 +42,7 @@ questionsController.put('/:id', async (req, res) => {
     }
 });
 
-questionsController.delete('/:id', async (req, res) => {
+questionsController.delete('/:id(\\d+)', async (req, res) => {
     try {
         const { id } = req.params;
 
