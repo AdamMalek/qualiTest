@@ -1,5 +1,5 @@
-import { createDb, migrate } from "postgres-migrations";
 require('dotenv').config();
+import { createDb, migrate } from "postgres-migrations";
 import dbConfig from "./config/database";
 
 async function runMigrations(): Promise<void> {
