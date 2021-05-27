@@ -39,7 +39,7 @@ class QuestionsRepository {
         }
         catch (e)
         {
-            // console.log(e)
+            console.error(e)
             throw e;
         }
     }
