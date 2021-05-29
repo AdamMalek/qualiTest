@@ -1,6 +1,5 @@
 import dbConfig from "../config/database";
-
-const Pool = require('pg').Pool;
+import { Pool } from 'pg';
 
 const dbPool = new Pool({ ...dbConfig });
 
