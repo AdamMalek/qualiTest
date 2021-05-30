@@ -5,16 +5,12 @@ import { dbPool } from "../database/db";
 const questionsController = router();
 
 questionsController.get('/', async (req, res) => {
-    try {
-        const questions = await dbPool.query("SELECT * FROM questions");
+    const questions = await dbPool.query("SELECT * FROM questions");
 
-        res.render('questions', { questions: questions.rows });
-    } catch (error) {
-        console.error(error.message);
-    }
+    res.render('questions', { questions: questions.rows });
 });
 
-questionsController.get('/:id', async (req, res) => {
+questionsController.get('/:id(\\d+)', async (req, res) => {
     const { id } = req.params;
 
     try {
@@ -39,7 +35,7 @@ questionsController.post('/', async (req, res) => {
     }
 });
 
-questionsController.put('/:id', async (req, res) => {
+questionsController.put('/:id(\\d+)', async (req, res) => {
     try {
         const { id } = req.params;
         const { title, content } = req.body;
@@ -53,7 +49,7 @@ questionsController.put('/:id', async (req, res) => {
     }
 });
 
-questionsController.delete('/:id', async (req, res) => {
+questionsController.delete('/:id(\\d+)', async (req, res) => {
     try {
         const { id } = req.params;
 
