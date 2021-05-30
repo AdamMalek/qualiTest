@@ -23,7 +23,7 @@ const api = express.Router()
   .use('/questions', questionsController)
   .use('/answers', answersController);
 
-app.use("/api", api);
+app.use(api);
 
 app.get("/notFoundTest", (req, res) => {
   notFound(res);
