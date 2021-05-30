@@ -1,10 +1,10 @@
 <div class="question-title">
   {{#if question}}
     <h1>
-      {{question.title}}
+      {{question.questiontitle}}
     </h1>
     <h2>
-      {{question.content}}
+      {{question.questioncontent}}
     </h2>
     <h3>
         Answers
@@ -12,7 +12,7 @@
     <ul>      
       {{#each answers}}
         <li>
-          {{this.content}}
+          {{this.answercontent}}
         </li>
       {{/each}}
     </ul>

@@ -14,11 +14,13 @@ questionsController.get('/:id(\\d+)', async (req, res) => {
     const { id } = req.params;
 
     try {
-        const questions = await dbPool.query("SELECT * FROM questions WHERE question_id = $1", [id]);
+        const questionAndAnswers = await dbPool.query(
+        "SELECT Q.question_id, Q.title as questionTitle, Q.content as questionContent, A.answer_id, A.content as answerContent " + 
+        "FROM questions AS Q " +
+        "INNER JOIN answers AS A ON Q.question_id = A.question_id " + 
+        "WHERE Q.question_id = $1", [id]);
 
-        const answers = await dbPool.query("SELECT * FROM answers WHERE question_id = $1", [id]);
-
-        res.render('question', {question: questions.rows[0], answers: answers.rows});
+        res.render('question', {question: questionAndAnswers.rows[0], answers: questionAndAnswers.rows});
     } catch (error) {
         console.error(error.message);
     }
