@@ -1,0 +1,18 @@
+<div class="question-title">
+  <h1>
+    Questions
+  </h1>
+  {{#if questions}}
+    {{#each questions}}
+      <h2>
+        <a href="/questions/{{this.question_id}}">
+          {{this.title}}
+        </a>
+      </h2>
+    {{/each}}
+  {{else}}
+    <p>
+      No model passed by query param
+    </p>
+  {{/if}}
+</div>
