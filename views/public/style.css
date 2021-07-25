@@ -1,12 +1,14 @@
+@import url("variables.css");
+
 body {
-    background-color: #282B3A;
+    background-color: var(--grey);
 }
 
 div.question-title {
-    color: #2BE7F9;
+    color: var(--blue);
 }
 
 a {
-    color: #2BE7F9;
+    color: var(--blue);
     text-decoration: none;
 }
