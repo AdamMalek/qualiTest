@@ -1,9 +1,9 @@
 require('dotenv').config();
 import express from "express";
 import questionsController from "./controllers/questionsController";
-import answersController from "./controllers/answersController";
+
+var exphbs = require('express-handlebars');
 import morgan from "morgan";
-import exphbs from "express-handlebars";
 import { notFound, serverError } from "./helpers/responseHelpers";
 
 const app = express();
@@ -20,8 +20,7 @@ app.use(express.static('./views/public'));
 app.all("/echo", (req, res) => res.json({ query: req.query, body: req.body }));
 
 const api = express.Router()
-  .use('/questions', questionsController)
-  .use('/answers', answersController);
+  .use('/questions', questionsController);
 
 app.use(api);
 
@@ -36,7 +35,7 @@ app.get("/error", (req, res) => {
 });
 
 // Handle 404
-app.use((req,res) => {
+app.use((req, res) => {
   res.status(404);
   res.render('error_404');
 });
