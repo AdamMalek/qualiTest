@@ -1,5 +1,6 @@
 import { Router as router } from "express";
-import questionsRepository from '../repositories/questionsRepository';
+
+import { dbPool } from "../database/db";
 
 const questionsController = router();
 
@@ -23,13 +24,17 @@ questionsController.get('/:id(\\d+)', async (req, res) => {
     } catch (error) {
         console.error(error.message);
     }
-    res.json(question);
 });
 
 questionsController.post('/', async (req, res) => {
-    const { title, content } = req.body;
-    const newQuestion = await questionsRepository.insertNewQuestion(title, content)
-    res.json(newQuestion);
+    try {
+        const { title, content } = req.body;
+        const newQuestion = await dbPool.query("INSERT INTO questions (title, content) VALUES ($1, $2) RETURNING *", [title, content]);
+
+        res.json(newQuestion);
+    } catch (error) {
+        console.error(error.message);
+    }
 });
 
 questionsController.put('/:id(\\d+)', async (req, res) => {
@@ -40,20 +45,22 @@ questionsController.put('/:id(\\d+)', async (req, res) => {
         await dbPool.query("UPDATE questions SET title = $1, content = $2 WHERE question_id = $3",
             [title, content, id]);
 
-    let updatedQuestion = await questionsRepository.updateQuestion(parseInt(id), title, content);
-    if (updatedQuestion === null) {
-        return res.sendStatus(404);
+        res.json("Question has been updated.");
+    } catch (error) {
+        console.error(error.message);
     }
-    return res.json(updatedQuestion);
 });
 
 questionsController.delete('/:id(\\d+)', async (req, res) => {
     try {
         const { id } = req.params;
 
-    let questionDeleted = await questionsRepository.deleteQuestion(parseInt(id));
+        await dbPool.query("DELETE FROM questions WHERE question_id = $1", [id]);
 
-    return res.sendStatus(questionDeleted ? 204 : 404);
+        res.json("Question has been deleted.");
+    } catch (error) {
+        console.error(error.message);
+    }
 });
 
 export default questionsController;

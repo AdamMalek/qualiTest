@@ -1,9 +1,7 @@
 require('dotenv').config();
 import express from "express";
 import questionsController from "./controllers/questionsController";
-import answersController from "./controllers/answersController"
 
-import { requestLoggerMiddleware } from "./middlewares/requestLoggerMiddleware";
 var exphbs = require('express-handlebars');
 import morgan from "morgan";
 import { notFound, serverError } from "./helpers/responseHelpers";
@@ -22,8 +20,7 @@ app.use(express.static('./views/public'));
 app.all("/echo", (req, res) => res.json({ query: req.query, body: req.body }));
 
 const api = express.Router()
-  .use('/questions', questionsController)
-  .use('/answers', answersController);
+  .use('/questions', questionsController);
 
 app.use(api);
 
