@@ -1,0 +1,14 @@
+@import url("variables.css");
+
+body {
+    background-color: var(--grey);
+}
+
+div.question-title {
+    color: var(--blue);
+}
+
+a {
+    color: var(--blue);
+    text-decoration: none;
+}
