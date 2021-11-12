@@ -1,8 +1,13 @@
 import QuestionEntity from '../entities/questionEntity';
 import { BaseRepository } from './baseRepository';
-
+import { dbPool } from '../database/db';
 
 class QuestionsRepository extends BaseRepository {
+
+    constructor() {
+        super(dbPool);
+    }
+
     async getAllQuestions(): Promise<QuestionEntity[]> {
         let res = await this.query<QuestionEntity>("SELECT * FROM questions");
         return res.rows;
